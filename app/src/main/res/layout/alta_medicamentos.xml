@@ -64,6 +64,7 @@
             android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="Medicamento:"
             android:textColor="#000000"
             android:textSize="15sp" />
@@ -72,6 +73,7 @@
             android:id="@+id/textView11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="MEDICAMENTO1"
             android:textColor="#FFFFFF"
             android:textSize="40sp" />
@@ -80,6 +82,7 @@
             android:id="@+id/textView15"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="Cantidad:"
             android:textColor="#000000"
             android:textSize="15sp" />
@@ -88,8 +91,10 @@
             android:id="@+id/editTextNumber2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/redondeado"
             android:ems="10"
+            android:hint="Cantidad"
             android:inputType="number"
             android:padding="10dp" />
 
@@ -97,6 +102,7 @@
             android:id="@+id/textView17"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="Duracion:"
             android:textColor="#000000"
             android:textSize="15sp" />
@@ -105,8 +111,10 @@
             android:id="@+id/editTextNumber3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/redondeado"
             android:ems="10"
+            android:hint="Duracion"
             android:inputType="number"
             android:padding="10dp" />
 
@@ -114,9 +122,38 @@
             android:id="@+id/textView18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="Tiempo:"
             android:textColor="#000000"
             android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextTime"
+                android:layout_width="wrap_content"
+                android:layout_height="59dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="0"
+                android:ems="5"
+                android:hint="12:00"
+                android:inputType="time"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#3F51B5"
+                android:text="Agregar"
+                android:textColorHighlight="#3F51B5"
+                android:textColorLink="#3F51B5" />
+        </LinearLayout>
+
 
     </LinearLayout>
 
