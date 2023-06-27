@@ -54,9 +54,11 @@
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="e-mail"
-                android:textSize="30sp"
+                android:layout_height="42dp"
+                android:hint="  e-mail"
+                android:textColorHint="@color/material_dynamic_neutral30"
+                android:textColor="@color/material_dynamic_neutral30"
+                android:textSize="25sp"
                 android:background="@drawable/redondeado"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp">
@@ -65,10 +67,12 @@
             <EditText
                 android:id="@+id/contra"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:layout_marginTop="30dp"
-                android:hint="contraseña"
-                android:textSize="30sp"
+                android:hint="  contraseña"
+                android:textColorHint="@color/material_dynamic_neutral30"
+                android:textColor="@color/material_dynamic_neutral30"
+                android:textSize="25sp"
                 android:background="@drawable/redondeado"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp">
@@ -79,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="Iniciar sesión"
+                android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:backgroundTint="#46A2AE">
             </Button>
@@ -90,20 +95,32 @@
             android:layout_height="match_parent"
             android:gravity="end"
             android:layout_below="@+id/datos"
-
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
             >
+            <TextView
+                android:id="@+id/noTienesCuenta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:layout_gravity="bottom"
+                android:text="No tienes una cuenta? "
+                android:textColor="#FFFFFFFF"
+                android:textSize="20sp"
+/>
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/registrate"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No tienes una cuenta? Registrate"
+                android:layout_weight="1"
+                android:text="Registrate"
+                android:textColor="#54CAE3"
                 android:textSize="20sp"
-                android:textColor="@color/black"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_horizontal"
-                android:layout_gravity="bottom">
-
-            </TextView>
+                android:layout_gravity="bottom"
+                android:onClick="registrarse"
+                />
 
         </LinearLayout>
 

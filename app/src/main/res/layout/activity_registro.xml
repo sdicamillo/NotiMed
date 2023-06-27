@@ -68,9 +68,11 @@
             <EditText
                 android:id="@+id/nombre"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="nombre"
-                android:textSize="30sp"
+                android:layout_height="42dp"
+                android:hint="  nombre"
+                android:textColorHint="@color/material_dynamic_neutral30"
+                android:textColor="@color/material_dynamic_neutral30"
+                android:textSize="25sp"
                 android:background="@drawable/redondeado"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp">
@@ -79,10 +81,12 @@
             <EditText
                 android:id="@+id/apellido"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:layout_marginTop="30dp"
-                android:hint="apellido"
-                android:textSize="30sp"
+                android:hint="  apellido"
+                android:textColorHint="@color/material_dynamic_neutral30"
+                android:textColor="@color/material_dynamic_neutral30"
+                android:textSize="25sp"
                 android:background="@drawable/redondeado"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp">
@@ -91,10 +95,12 @@
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:layout_marginTop="30dp"
-                android:hint="e-mail"
-                android:textSize="30sp"
+                android:hint="  e-mail"
+                android:textColorHint="@color/material_dynamic_neutral30"
+                android:textColor="@color/material_dynamic_neutral30"
+                android:textSize="25sp"
                 android:background="@drawable/redondeado"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp">
@@ -103,10 +109,12 @@
             <EditText
                 android:id="@+id/contra"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:layout_marginTop="30dp"
-                android:hint="contraseña"
-                android:textSize="30sp"
+                android:hint="  contraseña"
+                android:textColorHint="@color/material_dynamic_neutral30"
+                android:textColor="@color/material_dynamic_neutral30"
+                android:textSize="25sp"
                 android:background="@drawable/redondeado"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp">
