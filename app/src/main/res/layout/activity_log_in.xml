@@ -9,6 +9,7 @@
     tools:context=".LogIn">
 
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -42,28 +43,70 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/datos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="400dp"
             android:layout_marginTop="40dp"
-            android:layout_below="@id/titulo">
+            android:layout_below="@id/titulo"
+            android:orientation="vertical"
+            android:gravity="center">
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="email"
+                android:hint="e-mail"
                 android:textSize="30sp"
                 android:background="@drawable/redondeado"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp">
             </EditText>
 
+            <EditText
+                android:id="@+id/contra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="contraseña"
+                android:textSize="30sp"
+                android:background="@drawable/redondeado"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+            </EditText>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Iniciar sesión"
+                android:layout_gravity="center"
+                android:backgroundTint="#46A2AE">
+            </Button>
+
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end"
+            android:layout_below="@+id/datos"
+
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No tienes una cuenta? Registrate"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="bottom">
+
+            </TextView>
+
+        </LinearLayout>
+
 </RelativeLayout>
-
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
