@@ -6,12 +6,26 @@
     android:layout_height="match_parent"
     android:background="#3F51B5"
     android:backgroundTint="#437787"
-    tools:context=".LogIn">
+    tools:context=".Registro">
 
     <RelativeLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="48dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:onClick="atras"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_arrow_back_24" />
+
         <LinearLayout
             android:id="@+id/titulo"
             android:layout_width="match_parent"
@@ -52,9 +66,37 @@
             android:gravity="center">
 
             <EditText
+                android:id="@+id/nombre"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:hint="  nombre"
+                android:textColorHint="@color/material_dynamic_neutral30"
+                android:textColor="@color/material_dynamic_neutral30"
+                android:textSize="25sp"
+                android:background="@drawable/redondeado"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+            </EditText>
+
+            <EditText
+                android:id="@+id/apellido"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginTop="30dp"
+                android:hint="  apellido"
+                android:textColorHint="@color/material_dynamic_neutral30"
+                android:textColor="@color/material_dynamic_neutral30"
+                android:textSize="25sp"
+                android:background="@drawable/redondeado"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+            </EditText>
+
+            <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
+                android:layout_marginTop="30dp"
                 android:hint="  e-mail"
                 android:textColorHint="@color/material_dynamic_neutral30"
                 android:textColor="@color/material_dynamic_neutral30"
@@ -82,8 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="Iniciar sesión"
-                android:textColor="@color/white"
+                android:text="Registrarse"
                 android:layout_gravity="center"
                 android:backgroundTint="#46A2AE">
             </Button>
@@ -95,35 +136,9 @@
             android:layout_height="match_parent"
             android:gravity="end"
             android:layout_below="@+id/datos"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp"
             >
-            <TextView
-                android:id="@+id/noTienesCuenta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:layout_gravity="bottom"
-                android:text="No tienes una cuenta? "
-                android:textColor="#FFFFFFFF"
-                android:textSize="20sp"
-/>
-
-            <TextView
-                android:id="@+id/registrate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Registrate"
-                android:textColor="#54CAE3"
-                android:textSize="20sp"
-                android:layout_gravity="bottom"
-                android:onClick="registrarse"
-                />
-
         </LinearLayout>
 
-</RelativeLayout>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
