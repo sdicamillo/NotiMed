@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "738093268509",
+    "project_id": "notimed-c3290",
+    "storage_bucket": "notimed-c3290.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738093268509:android:867e29cb9e4b89dd1490f4",
+        "android_client_info": {
+          "package_name": "andoroid.app.mobiles.notimed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738093268509-tohrt0p1elklpulog3j8oelhmf2lgc46.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzrWaYqDcZWvNvjthjGo39EDaEGFsIpQ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738093268509-tohrt0p1elklpulog3j8oelhmf2lgc46.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
