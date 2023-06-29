@@ -55,28 +55,30 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:hint="  e-mail"
-                android:textColorHint="@color/material_dynamic_neutral30"
-                android:textColor="@color/material_dynamic_neutral30"
-                android:textSize="25sp"
-                android:background="@drawable/redondeado"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp">
-            </EditText>
+                android:background="@drawable/redondeado"
+                android:hint="e-mail"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"
+                android:textColor="@color/material_dynamic_neutral30"
+                android:textColorHint="@color/material_dynamic_neutral30"
+                android:textSize="25sp" />
 
             <EditText
                 android:id="@+id/contra"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
-                android:hint="  contraseña"
-                android:textColorHint="@color/material_dynamic_neutral30"
-                android:textColor="@color/material_dynamic_neutral30"
-                android:textSize="25sp"
-                android:background="@drawable/redondeado"
                 android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp">
-            </EditText>
+                android:background="@drawable/redondeado"
+                android:hint="contraseña"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:textColor="@color/material_dynamic_neutral30"
+                android:textColorHint="@color/material_dynamic_neutral30"
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/logInBtn"
@@ -86,18 +88,19 @@
                 android:text="Iniciar sesión"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
+                android:onClick="logIn"
                 android:backgroundTint="#46A2AE">
             </Button>
 
-            <Button
+            <ImageButton
                 android:id="@+id/googleBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="#46A2AE"
-                android:text="Iniciar sesión con Google"
-                android:textColor="@color/white"></Button>
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:onClick="googleLogin"
+                app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
 
 
         </LinearLayout>
@@ -129,6 +132,7 @@
                 android:layout_weight="1"
                 android:text="Registrate"
                 android:textColor="#54CAE3"
+                android:onClick="registrate"
                 android:textSize="20sp"
                 android:layout_gravity="bottom"
                 />

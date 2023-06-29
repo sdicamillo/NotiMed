@@ -8,6 +8,7 @@ import android.text.Layout
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -25,51 +26,31 @@ class LogIn : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
-
-        setup()
-        sesion()
-
     }
 
-    override fun onStart() {
-        super.onStart()
-        val layout = findViewById<RelativeLayout>(R.id.logInLayout)
-        layout.visibility = View.VISIBLE
-    }
-
-    private fun sesion(){
-        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val email = prefs.getString("email", null)
-        if (email != null){
-            val layout = findViewById<RelativeLayout>(R.id.logInLayout)
-            layout.visibility = View.INVISIBLE
-            showPerfil(email)
-        }
-    }
-
-    private fun setup(){
-        val btn = findViewById<Button>(R.id.logInBtn)
-        val email = findViewById<EditText>(R.id.email).text
-        val pass = findViewById<EditText>(R.id.contra).text
-        val registroBtn = findViewById<TextView>(R.id.registrate)
-        val googleBtn = findViewById<Button>(R.id.googleBtn)
-
-        //Inicio de sesión
-        btn.setOnClickListener{
+    //Inicio de sesión
+        fun logIn(view: View){
+            val email = findViewById<EditText>(R.id.email).text
+            val pass = findViewById<EditText>(R.id.contra).text
+            println(email)
+            println(pass)
             if (email.isNotEmpty() && pass.isNotEmpty()){
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email.toString(), pass.toString()).addOnCompleteListener{
                     if (it.isSuccessful){
                         showPerfil(it.result?.user?.email ?:"")
-
+                        finish()
                     } else{
-                        showAlert()
+                        showAlert(it.exception?.message.toString())
                     }
                 }
+            }
+            else{
+                showAlert("Por favor, rellene todos los campos")
             }
         }
 
         //configuración de google
-        googleBtn.setOnClickListener {
+        fun googleLogin(view: View){
             val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
             val googleClient = GoogleSignIn.getClient(this, googleConf)
             googleClient.signOut()
@@ -77,17 +58,13 @@ class LogIn : AppCompatActivity() {
         }
 
         //Registrarse si no tiene cuenta
-        registroBtn.setOnClickListener {
+        fun registrate(view: View) {
             val registrarse = Intent(this, Registro::class.java)
             startActivity(registrarse)
         }
-
-    }
-
-    private fun showAlert(){
+    private fun showAlert(mensaje: String){
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Error")
-        builder.setMessage("No se pudo registrar al usuario")
+        builder.setMessage(mensaje)
         builder.setPositiveButton("Aceptar", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
@@ -106,20 +83,18 @@ class LogIn : AppCompatActivity() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)
-
                 if (account != null){
                     val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
                         if (it.isSuccessful) {
                             showPerfil(account.email ?: "")
-
                         } else {
-                            showAlert()
+                            showAlert(it.exception?.message.toString())
                         }
                     }
                 }
             } catch (e: ApiException){
-                showAlert()
+                showAlert(e.toString())
             }
         }
     }
