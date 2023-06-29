@@ -9,7 +9,7 @@
     tools:context=".LogIn">
 
     <RelativeLayout
-
+        android:id="@+id/logInLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -88,6 +88,17 @@
                 android:layout_gravity="center"
                 android:backgroundTint="#46A2AE">
             </Button>
+
+            <Button
+                android:id="@+id/googleBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="#46A2AE"
+                android:text="Iniciar sesión con Google"
+                android:textColor="@color/white"></Button>
+
 
         </LinearLayout>
 

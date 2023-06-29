@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">NotiMed</string>
     <string name="notimed">notimed</string>
+    <string name="prefs_file">notimed.PREFERENCE_FILE_KEY</string>
 </resources>
