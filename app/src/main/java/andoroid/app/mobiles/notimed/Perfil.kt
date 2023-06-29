@@ -23,5 +23,18 @@ class Perfil : AppCompatActivity() {
     private fun setup(email:String){
         var nombre = findViewById<TextView>(R.id.nombre)
         nombre.text = email
+
+        val btn = findViewById<Button>(R.id.logOutBtn)
+
+        btn.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            showLogIn()
+        }
     }
+
+    private fun showLogIn(){
+        val logIn = Intent(this, LogIn::class.java)
+        startActivity(logIn)
+    }
+
 }
