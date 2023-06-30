@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.FirebaseDatabase
 
 
 class LogIn : AppCompatActivity() {
@@ -77,6 +78,8 @@ class LogIn : AppCompatActivity() {
         startActivity(perfil)
     }
 
+
+    //Inicio de sesión de google
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GOOGLE_SIGN_IN){
@@ -88,6 +91,7 @@ class LogIn : AppCompatActivity() {
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
                         if (it.isSuccessful) {
                             showPerfil(account.email ?: "")
+                            persistirUsuario()
                         } else {
                             showAlert(it.exception?.message.toString())
                         }
@@ -98,4 +102,31 @@ class LogIn : AppCompatActivity() {
             }
         }
     }
+
+    private fun persistirUsuario(){
+        // Obtén una instancia de FirebaseAuth
+        val firebaseAuth = FirebaseAuth.getInstance()
+
+        // Obtén el usuario autenticado actual
+        val user = firebaseAuth.currentUser
+
+        // Crea una referencia a la base de datos
+        val database = FirebaseDatabase.getInstance()
+        val usersRef = database.getReference("users")
+
+        // Obtén los datos del usuario
+        val userId = user?.uid
+        val userEmail = user?.email
+        val userName = user?.displayName
+
+        // Crea un objeto para guardar los datos del usuario
+        val userData = HashMap<String, Any>()
+        userData["email"] = userEmail ?: ""
+        userData["name"] = userName ?: ""
+
+        // Guarda los datos del usuario en la base de datos
+        usersRef.child(userId ?: "").setValue(userData)
+
+    }
+
 }
