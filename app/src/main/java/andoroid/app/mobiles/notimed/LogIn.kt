@@ -72,9 +72,10 @@ class LogIn : AppCompatActivity() {
     }
 
     private fun showPerfil(email: String){
-        val perfil = Intent(this, Perfil::class.java).apply {
-            putExtra("email", email)
-        }
+        //cambiar AltaMedicamento por Perfil
+        val perfil = Intent(this, AltaMedicamento::class.java)//.apply {
+            //putExtra("email", email)
+
         startActivity(perfil)
     }
 

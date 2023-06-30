@@ -69,14 +69,15 @@
             android:textColor="#000000"
             android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/textView11"
+        <EditText
+            android:id="@+id/nombreMed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="MEDICAMENTO1"
-            android:textColor="#FFFFFF"
-            android:textSize="40sp" />
+            android:background="@drawable/redondeado"
+            android:ems="10"
+            android:hint="Medicamento"
+            android:padding="10dp" />
 
         <TextView
             android:id="@+id/textView15"
@@ -88,7 +89,7 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/editTextNumber2"
+            android:id="@+id/cantidad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -103,18 +104,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Duracion:"
+            android:text="Dosis:"
             android:textColor="#000000"
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/editTextNumber3"
+            android:id="@+id/dosis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/redondeado"
             android:ems="10"
-            android:hint="Duracion"
+            android:hint="Dosis"
             android:inputType="number"
             android:padding="10dp" />
 
@@ -145,7 +146,7 @@
                 android:textSize="30sp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/agregarBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#3F51B5"
