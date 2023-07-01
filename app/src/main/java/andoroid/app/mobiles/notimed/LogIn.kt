@@ -17,7 +17,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class LogIn : AppCompatActivity() {
@@ -44,7 +47,7 @@ class LogIn : AppCompatActivity() {
         if (email != null){
             val layout = findViewById<RelativeLayout>(R.id.logInLayout)
             layout.visibility = View.INVISIBLE
-            showPerfil(email)
+            showPerfil()
         }
     }
 
@@ -57,7 +60,7 @@ class LogIn : AppCompatActivity() {
             if (email.isNotEmpty() && pass.isNotEmpty()){
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email.toString(), pass.toString()).addOnCompleteListener{
                     if (it.isSuccessful){
-                        showPerfil(it.result?.user?.email ?:"")
+                        showPerfil()
                         finish()
                     } else{
                         showAlert(it.exception?.message.toString())
@@ -90,8 +93,9 @@ class LogIn : AppCompatActivity() {
             dialog.show()
         }
 
-        private fun showPerfil(email: String){
-            val perfil = Intent(this, Perfil::class.java)
+        private fun showPerfil(){
+            //cambiar AltaMedicamento por Perfil
+            val perfil = Intent(this, MainActivity::class.java)
             startActivity(perfil)
         }
 
@@ -107,8 +111,8 @@ class LogIn : AppCompatActivity() {
                     val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            showPerfil(account.email ?: "")
                             persistirUsuario()
+                            showPerfil()
                         } else {
                             showAlert(it.exception?.message.toString())
                         }
@@ -131,18 +135,37 @@ class LogIn : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance()
         val usersRef = database.getReference("users")
 
-        // Obtén los datos del usuario
-        val userId = user?.uid
-        val userEmail = user?.email
-        val userName = user?.displayName
 
-        // Crea un objeto para guardar los datos del usuario
-        val userData = HashMap<String, Any>()
-        userData["email"] = userEmail ?: ""
-        userData["name"] = userName ?: ""
+        if (user != null) {
+            usersRef.child(user.uid).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        println("existe")
 
-        // Guarda los datos del usuario en la base de datos
-        usersRef.child(userId ?: "").setValue(userData)
+                    } else {
+                        // El usuario no existe en la base de datos
+                        // Obtén los datos del usuario
+                        val userId = user?.uid
+                        val userEmail = user?.email
+                        val userName = user?.displayName
+
+                        // Crea un objeto para guardar los datos del usuario
+                        val userData = HashMap<String, Any>()
+                        userData["email"] = userEmail ?: ""
+                        userData["name"] = userName ?: ""
+
+                        // Guarda los datos del usuario en la base de datos
+                        usersRef.child(userId ?: "").setValue(userData)
+                        println("El usuario no existe")
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Ocurrió un error al realizar la consulta
+                    println("Error al consultar la base de datos: ${databaseError.message}")
+                }
+            })
+        }
 
     }
 
