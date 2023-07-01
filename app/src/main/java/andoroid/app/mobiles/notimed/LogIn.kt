@@ -91,9 +91,7 @@ class LogIn : AppCompatActivity() {
         }
 
         private fun showPerfil(email: String){
-            val perfil = Intent(this, Perfil::class.java).apply {
-                putExtra("email", email)}
-
+            val perfil = Intent(this, Perfil::class.java)
             startActivity(perfil)
         }
 
