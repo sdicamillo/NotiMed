@@ -27,6 +27,25 @@ class LogIn : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
+
+        sesion()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val layout = findViewById<RelativeLayout>(R.id.logInLayout)
+        layout.visibility = View.VISIBLE
+    }
+
+    //guarda la última sesión iniciada
+    private fun sesion(){
+        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val email = prefs.getString("email", null)
+        if (email != null){
+            val layout = findViewById<RelativeLayout>(R.id.logInLayout)
+            layout.visibility = View.INVISIBLE
+            showPerfil(email)
+        }
     }
 
     //Inicio de sesión
@@ -63,21 +82,20 @@ class LogIn : AppCompatActivity() {
             val registrarse = Intent(this, Registro::class.java)
             startActivity(registrarse)
         }
-    private fun showAlert(mensaje: String){
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage(mensaje)
-        builder.setPositiveButton("Aceptar", null)
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
+        private fun showAlert(mensaje: String){
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage(mensaje)
+            builder.setPositiveButton("Aceptar", null)
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+        }
 
-    private fun showPerfil(email: String){
-        //cambiar AltaMedicamento por Perfil
-        val perfil = Intent(this, AltaMedicamento::class.java)//.apply {
-            //putExtra("email", email)
+        private fun showPerfil(email: String){
+            val perfil = Intent(this, Perfil::class.java).apply {
+                putExtra("email", email)}
 
-        startActivity(perfil)
-    }
+            startActivity(perfil)
+        }
 
 
     //Inicio de sesión de google
