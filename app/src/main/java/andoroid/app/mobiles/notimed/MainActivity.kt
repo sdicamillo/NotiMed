@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -25,35 +26,8 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_search -> {
-                    // Acción para el elemento "Inicio"
-
-                    val menuPrincipal = Intent(this, MainActivity::class.java)
-                    startActivity(menuPrincipal)
-
-                    true
-                }
-
-                R.id.navigation_home -> {
-                    // Acción para el elemento "Medicamentos"
-
-                    val menuMedicamentos = Intent(this, ListaMedicamentos::class.java)
-                    startActivity(menuMedicamentos)
-
-                    true
-                }
-
-                R.id.navigation_profile -> {
-                    // Acción para el elemento "Perfil"
-
-                    val menuPerfil = Intent(this, Perfil::class.java)
-                    startActivity(menuPerfil)
-                    true
-                }
-
-                else -> false
-            }
+            BottomNavigationHandler.handleNavigationItemSelected(this, item)
+            true
         }
 
         obtenerMedicamentos()
