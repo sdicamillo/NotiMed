@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -18,6 +19,40 @@ class Perfil : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.perfil)
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_search -> {
+                    // Acción para el elemento "Inicio"
+
+                    val menuPrincipal = Intent(this, MainActivity::class.java)
+                    startActivity(menuPrincipal)
+
+                    true
+                }
+
+                R.id.navigation_home -> {
+                    // Acción para el elemento "Medicamentos"
+
+                    val menuMedicamentos = Intent(this, ListaMedicamentos::class.java)
+                    startActivity(menuMedicamentos)
+
+                    true
+                }
+
+                R.id.navigation_profile -> {
+                    // Acción para el elemento "Perfil"
+
+                    val menuPerfil = Intent(this, Perfil::class.java)
+                    startActivity(menuPerfil)
+                    true
+                }
+
+                else -> false
+            }
+        }
 
         //muestro los datos del usuario
         mostrarDatos()
