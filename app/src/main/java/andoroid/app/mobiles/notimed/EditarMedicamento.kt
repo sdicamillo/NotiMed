@@ -2,6 +2,7 @@ package andoroid.app.mobiles.notimed
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,8 @@ class EditarMedicamento : AppCompatActivity() {
 
     private fun setup(){
 
+        val guardarbtn = findViewById<Button>(R.id.guardarBtn)
+
         //variables desde el medicamento detalle
         val id = intent.getStringExtra("id")
         val name = intent.getStringExtra("name")
@@ -34,11 +37,15 @@ class EditarMedicamento : AppCompatActivity() {
         dosisView.text = dosis
         stockView.text = stock
 
-        if (id != null && name != null && dosis != null && stock != null) {
-            persistirMedicamento(id, name, dosis, stock)
-        } else{
-            println("error")
+        guardarbtn.setOnClickListener {
+            if (id != null && name != null && dosis != null && stock != null) {
+                println("perisitir fun")
+                persistirMedicamento(id, nameView.text.toString(), dosisView.text.toString(), stockView.text.toString())
+            } else{
+                println("error")
+            }
         }
+
     }
 
     private fun persistirMedicamento(medId: String, medName:String, medDosis:String, medStock:String ){
