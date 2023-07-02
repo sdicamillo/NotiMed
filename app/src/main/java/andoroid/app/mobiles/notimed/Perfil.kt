@@ -31,8 +31,10 @@ class Perfil : AppCompatActivity() {
     }
 
     private fun setup(){
-        var nombreTxt = findViewById<TextView>(R.id.nombre)
+        val nombreTxt = findViewById<TextView>(R.id.nombre)
+        val emailTxt = findViewById<TextView>(R.id.email)
         val logOutBtn = findViewById<Button>(R.id.logOutBtn)
+        val editarBtn = findViewById<Button>(R.id.editarBtn)
 
 
         //cerrar sesión
@@ -46,12 +48,22 @@ class Perfil : AppCompatActivity() {
             FirebaseAuth.getInstance().signOut()
             showLogIn()
         }
+
+        //cambio de pantalla a editar perfil
+        editarBtn.setOnClickListener {
+            val intent = Intent(this, EditarPerfil::class.java)
+            intent.putExtra("name", nombreTxt.text)
+            intent.putExtra("email", emailTxt.text)
+            startActivity(intent)
+        }
+
+
     }
 
     //cargar vista con los datos del usuario
     private fun mostrarDatos(){
         var nombreTxt = findViewById<TextView>(R.id.nombre)
-        var emailTxt = findViewById<TextView>(R.id.apellido)
+        var emailTxt = findViewById<TextView>(R.id.email)
 
         // Obtengo una instancia de FirebaseAuth
         val firebaseAuth = FirebaseAuth.getInstance()
