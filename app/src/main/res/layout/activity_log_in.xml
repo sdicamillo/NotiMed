@@ -92,15 +92,35 @@
                 android:backgroundTint="#46A2AE">
             </Button>
 
-            <ImageButton
+            <RelativeLayout
                 android:id="@+id/googleBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:paddingStart="30dp"
-                android:paddingEnd="30dp"
-                android:onClick="googleLogin"
-                app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+                android:onClick="googleLogin">
+
+                <ImageButton
+                    android:id="@+id/google"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:onClick="googleLogin"
+                    app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Iniciar sesión con Google"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:layout_toEndOf="@id/google"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
 
 
         </LinearLayout>
