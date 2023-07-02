@@ -6,12 +6,20 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MedicamentoDetalle : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detalle_medicamentos)
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            BottomNavigationHandler.handleNavigationItemSelected(this, item)
+            true
+        }
 
         //SETUP
         setup()
