@@ -14,6 +14,9 @@
         android:theme="@style/Theme.NotiMed"
         tools:targetApi="31">
         <activity
+            android:name=".ListaMedicamentos"
+            android:exported="false" />
+        <activity
             android:name=".EditarMedicamento"
             android:exported="false" />
         <activity
