@@ -37,13 +37,14 @@ class MainActivity : AppCompatActivity() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (medicamentoSnapshot in dataSnapshot.children) {
 
+                        val medId = medicamentoSnapshot.getValue(String::class.java)
                         val medName = medicamentoSnapshot.child("name").getValue(String::class.java)
                         val medDosis = medicamentoSnapshot.child("dosis").getValue(String::class.java)
                         val medStock = medicamentoSnapshot.child("stock").getValue(String::class.java)
 
 
-                        if (medName != null && medDosis != null && medStock != null){
-                            val medicamento = Medicamento(medName, medDosis, medStock)
+                        if (medId != null && medName != null && medDosis != null && medStock != null){
+                            val medicamento = Medicamento(medId, medName, medDosis, medStock)
                             medicamentosList.add(medicamento)
                         }
                     }

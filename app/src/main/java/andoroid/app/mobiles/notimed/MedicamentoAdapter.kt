@@ -39,6 +39,7 @@ class MedicamentoAdapter(private val medicamentos: List<Medicamento>) : Recycler
             itemView.setOnClickListener{
                 val context = itemView.context
                 val intent = Intent(context, MedicamentoDetalle::class.java)
+                intent.putExtra("id", medicamento.id)
                 intent.putExtra("name", medicamento.name)
                 intent.putExtra("dosis", medicamento.dosis)
                 intent.putExtra("stock", medicamento.stock)
