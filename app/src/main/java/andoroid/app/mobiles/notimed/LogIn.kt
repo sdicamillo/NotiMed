@@ -95,7 +95,7 @@ class LogIn : AppCompatActivity() {
 
         private fun showPerfil(){
             //cambiar AltaMedicamento por Perfil
-            val perfil = Intent(this, ListaMedicamentos::class.java)
+            val perfil = Intent(this, MainActivity::class.java)
             startActivity(perfil)
         }
 
