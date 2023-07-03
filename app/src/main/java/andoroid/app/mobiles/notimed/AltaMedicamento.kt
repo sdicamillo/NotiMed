@@ -76,8 +76,6 @@ class AltaMedicamento : AppCompatActivity() {
             } else {
                 println("El usuario no ha iniciado sesión")
             }
-
-
         }
 
     }

@@ -47,7 +47,7 @@ class LogIn : AppCompatActivity() {
         if (email != null){
             val layout = findViewById<RelativeLayout>(R.id.logInLayout)
             layout.visibility = View.INVISIBLE
-            showPerfil()
+            showMain()
         }
     }
 
@@ -60,8 +60,7 @@ class LogIn : AppCompatActivity() {
             if (email.isNotEmpty() && pass.isNotEmpty()){
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email.toString(), pass.toString()).addOnCompleteListener{
                     if (it.isSuccessful){
-                        showPerfil()
-                        finish()
+                        showMain()
                     } else{
                         showAlert(it.exception?.message.toString())
                     }
@@ -93,10 +92,11 @@ class LogIn : AppCompatActivity() {
             dialog.show()
         }
 
-        private fun showPerfil(){
+        private fun showMain(){
             //cambiar AltaMedicamento por Perfil
-            val perfil = Intent(this, MainActivity::class.java)
-            startActivity(perfil)
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finishAffinity()
         }
 
 
@@ -112,7 +112,7 @@ class LogIn : AppCompatActivity() {
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
                         if (it.isSuccessful) {
                             persistirUsuario()
-                            showPerfil()
+                            showMain()
                         } else {
                             showAlert(it.exception?.message.toString())
                         }

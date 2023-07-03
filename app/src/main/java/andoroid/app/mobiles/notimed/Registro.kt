@@ -34,9 +34,8 @@ class Registro : AppCompatActivity() {
         if (email.isNotEmpty() && pass.isNotEmpty() && name.isNotEmpty() && surname.isNotEmpty()){
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.toString(), pass.toString()).addOnCompleteListener{
                 if (it.isSuccessful){
-                    showPerfil(it.result?.user?.email ?:"")
+                    showMain()
                     persistirUsuario(name.toString())
-                    finish()
                 }
                 else{
                     showAlert(it.exception?.message.toString())
@@ -68,11 +67,10 @@ class Registro : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun showPerfil(email: String){
-        val perfil = Intent(this, Perfil::class.java).apply {
-            putExtra("email", email)
-        }
-        startActivity(perfil)
+    private fun showMain(){
+        val intent = Intent(this, Perfil::class.java)
+        startActivity(intent)
+        finishAffinity()
     }
 
     private fun persistirUsuario(name: String){
