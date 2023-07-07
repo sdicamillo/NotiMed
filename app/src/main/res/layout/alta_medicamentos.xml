@@ -45,7 +45,6 @@
             android:text="Med"
             android:textColor="#54CAE3"
             android:textSize="32sp" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -118,6 +117,101 @@
             android:hint="Dosis"
             android:inputType="number"
             android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Dias:"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Agrega los botones para los otros días aquí -->
+
+            <Button
+                android:id="@+id/mondayButton"
+                android:layout_width="56dp"
+                android:layout_height="50dp"
+                android:background="@drawable/day_selector"
+                android:text="L"
+                android:textColor="@color/black"
+                android:textColorHighlight="#FFFFFF"
+                android:textColorLink="#FFFFFF"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/martesButton"
+                android:layout_width="56dp"
+                android:layout_height="50dp"
+                android:background="@drawable/day_selector"
+                android:text="M"
+                android:textColor="@color/black"
+                android:textColorHighlight="#FFFFFF"
+                android:textColorLink="#FFFFFF"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/miercolesButton"
+                android:layout_width="56dp"
+                android:layout_height="50dp"
+                android:background="@drawable/day_selector"
+                android:text="X"
+                android:textColor="@color/black"
+                android:textColorHighlight="#FFFFFF"
+                android:textColorLink="#FFFFFF"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/juevesButton"
+                android:layout_width="56dp"
+                android:layout_height="50dp"
+                android:background="@drawable/day_selector"
+                android:text="J"
+                android:textColor="@color/black"
+                android:textColorHighlight="#FFFFFF"
+                android:textColorLink="#FFFFFF"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/viernesButton"
+                android:layout_width="56dp"
+                android:layout_height="50dp"
+                android:background="@drawable/day_selector"
+                android:text="V"
+                android:textColor="@color/black"
+                android:textColorHighlight="#FFFFFF"
+                android:textColorLink="#FFFFFF"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/sabadoButton"
+                android:layout_width="56dp"
+                android:layout_height="50dp"
+                android:background="@drawable/day_selector"
+                android:text="S"
+                android:textColor="@color/black"
+                android:textColorHighlight="#FFFFFF"
+                android:textColorLink="#FFFFFF"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/domingoButton"
+                android:layout_width="56dp"
+                android:layout_height="50dp"
+                android:background="@drawable/day_selector"
+                android:text="D"
+                android:textColor="@color/black"
+                android:textColorHighlight="#FFFFFF"
+                android:textColorLink="#FFFFFF"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView18"
