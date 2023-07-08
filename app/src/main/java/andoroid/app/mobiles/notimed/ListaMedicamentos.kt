@@ -1,6 +1,5 @@
 package andoroid.app.mobiles.notimed
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,11 +18,10 @@ class ListaMedicamentos : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+        bottomNavigationView.setOnItemSelectedListener { item ->
             BottomNavigationHandler.handleNavigationItemSelected(this, item)
             true
         }
-
         obtenerMedicamentos()
     }
 

@@ -16,7 +16,6 @@ class ListaMedicamentoAdapter(private val medicamentos: List<Medicamento>) : Rec
 
     override fun onBindViewHolder(holder: MedicamentoViewHolder, position: Int) {
         val medicamento = medicamentos[position]
-
         holder.bind(medicamento)
     }
 
@@ -41,7 +40,6 @@ class ListaMedicamentoAdapter(private val medicamentos: List<Medicamento>) : Rec
                 val intent = Intent(context, MedicamentoDetalle::class.java)
                 intent.putExtra("id", medicamento.id)
                 intent.putExtra("name", medicamento.name)
-                intent.putExtra("dosis", medicamento.dosis)
                 intent.putExtra("stock", medicamento.stock)
                 context.startActivity(intent)
             }
