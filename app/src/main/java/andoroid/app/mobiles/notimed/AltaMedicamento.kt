@@ -28,6 +28,7 @@ class AltaMedicamento : AppCompatActivity() {
     private fun setup(){
         val nombre = findViewById<EditText>(R.id.nombreMed).text
         val stock = findViewById<EditText>(R.id.cantidad).text
+        val dosis = findViewById<EditText>(R.id.dosis).text
         val agregarBtn = findViewById<Button>(R.id.agregarBtn)
         val guardarBtn = findViewById<Button>(R.id.guardarBtn)
 
@@ -44,6 +45,7 @@ class AltaMedicamento : AppCompatActivity() {
                 val medData = HashMap<String, Any>()
                 medData["name"] = nombre.toString()
                 medData["stock"] = stock.toString()
+                medData["dosis"] = dosis.toString()
 
 
                 // Generar una clave única para el nuevo medicamento

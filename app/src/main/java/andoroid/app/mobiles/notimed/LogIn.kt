@@ -93,8 +93,7 @@ class LogIn : AppCompatActivity() {
         }
 
         private fun showMain(){
-            //cambiar AltaMedicamento por Perfil
-            val intent = Intent(this, AltaMedicamento::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finishAffinity()
         }
