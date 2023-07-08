@@ -1,45 +1,33 @@
 package andoroid.app.mobiles.notimed
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MedicamentoDetalle : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detalle_medicamentos)
-
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            BottomNavigationHandler.handleNavigationItemSelected(this, item)
-            true
-        }
-
         //SETUP
         setup()
     }
 
     private fun setup(){
-
         val editarBtn = findViewById<Button>(R.id.editarBtn)
-
+        val backArrow = findViewById<ImageButton>(R.id.backButton)
         //variables desde el item medicamento
         val id = intent.getStringExtra("id")
         val name = intent.getStringExtra("name")
         val dosis = intent.getStringExtra("dosis")
         val stock = intent.getStringExtra("stock")
-
         //controles
         val nameView = findViewById<TextView>(R.id.nombreDetalle)
         val dosisView = findViewById<TextView>(R.id.dosisDetalle)
         val stockView = findViewById<TextView>(R.id.stockDetalle)
-
         nameView.text = name
         dosisView.text = dosis
         stockView.text = stock
@@ -53,7 +41,9 @@ class MedicamentoDetalle : AppCompatActivity() {
             intent.putExtra("stock", stock)
             startActivity(intent)
         }
-
+        backArrow.setOnClickListener{
+            finish()
+        }
 
     }
 }
