@@ -1,7 +1,12 @@
 package andoroid.app.mobiles.notimed
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -15,16 +20,17 @@ class ListaMedicamentos : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_medicamentos)
-
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
         bottomNavigationView.setOnItemSelectedListener { item ->
             BottomNavigationHandler.handleNavigationItemSelected(this, item)
             true
         }
         obtenerMedicamentos()
+        val btnAltaMedicamento = findViewById<Button>(R.id.altaMedicamento_btn)
+        btnAltaMedicamento.setOnClickListener {
+            altaMedicamento(this)
+        }
     }
-
     private lateinit var recyclerView: RecyclerView
 
     private fun obtenerMedicamentos() {
@@ -62,6 +68,13 @@ class ListaMedicamentos : AppCompatActivity() {
             })
 
         }
+    }
+
+    private fun altaMedicamento(context: Context){
+        println("Alta")
+        val intent = Intent(context, AltaMedicamento::class.java)
+        println(intent)
+        startActivity(intent)
     }
 
     private fun mostrarMedicamentos(medicamentosList: List<Medicamento>){
