@@ -30,7 +30,7 @@ class AltaMedicamento : AppCompatActivity() {
         val nombre = findViewById<EditText>(R.id.nombreMed).text
         val stock = findViewById<EditText>(R.id.cantidad).text
         val agregarBtn = findViewById<Button>(R.id.agregarBtn)
-        val guardarBtn = findViewById<Button>(R.id.save_button)
+        val guardarBtn = findViewById<Button>(R.id.guardarBtn)
 
         arrowBack.setOnClickListener{
             finish()
