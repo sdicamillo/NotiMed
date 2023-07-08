@@ -79,13 +79,31 @@
             android:ems="10"
             android:hint="Medicamento"
             android:padding="10dp" />
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Dosis:"
+            android:textColor="#000000"
+            android:textSize="15sp" />
 
+        <EditText
+            android:id="@+id/dosis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/redondeado"
+            android:ems="10"
+            android:hint="Dosis"
+            android:inputType="number"
+            android:padding="10dp" />
         <TextView
             android:id="@+id/textView15"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Cantidad:"
+            android:text="Stock:"
             android:textColor="#000000"
             android:textSize="15sp" />
 
@@ -96,7 +114,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/redondeado"
             android:ems="10"
-            android:hint="Cantidad"
+            android:hint="Stock"
             android:inputType="number"
             android:padding="10dp" />
 
@@ -149,7 +167,7 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/save_button"
+                    android:id="@+id/guardarBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center_horizontal"

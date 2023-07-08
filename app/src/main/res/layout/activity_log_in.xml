@@ -80,11 +80,23 @@
                 android:textColorHint="@color/material_dynamic_neutral30"
                 android:textSize="25sp" />
 
+            <TextView
+                android:id="@+id/reestablecer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="¿Has olvidado tu contraseña?"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                android:textColor="#54CAE3"
+                android:onClick="reestablerContra"
+                android:textSize="20sp"
+                />
+
             <Button
                 android:id="@+id/logInBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:text="Iniciar sesión"
                 android:textColor="@color/white"
                 android:layout_gravity="center"

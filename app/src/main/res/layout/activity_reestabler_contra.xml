@@ -1,29 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#3F51B5"
     android:backgroundTint="#437787"
-    tools:context=".Registro">
+    android:orientation="vertical"
+    tools:context=".ReestablerContra">
 
     <RelativeLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@null"
-            android:onClick="atras"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/baseline_arrow_back_24" />
 
         <LinearLayout
             android:id="@+id/titulo"
@@ -37,45 +26,32 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:text="Noti"
                 android:textColor="#FFFFFFFF"
-                android:textSize="42sp"
-                android:layout_marginTop="60dp"/>
+                android:textSize="42sp" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
                 android:layout_weight="1"
                 android:text="Med"
                 android:textColor="#54CAE3"
-                android:textSize="42sp"
-                android:layout_marginTop="60dp"/>
+                android:textSize="42sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/datos"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:layout_marginTop="40dp"
             android:layout_below="@id/titulo"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <EditText
-                android:id="@+id/nombre"
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/redondeado"
-                android:hint="Nombre"
-                android:paddingStart="10dp"
-                android:textColor="@color/material_dynamic_neutral30"
-                android:textColorHint="@color/material_dynamic_neutral30"
-                android:textSize="25sp" />
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/email"
@@ -91,30 +67,16 @@
                 android:textColorHint="@color/material_dynamic_neutral30"
                 android:textSize="25sp" />
 
-            <EditText
-                android:id="@+id/contra"
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/redondeado"
-                android:hint="Contraseña"
-                android:inputType="textPassword"
-                android:paddingStart="10dp"
-                android:textColor="@color/material_dynamic_neutral30"
-                android:textColorHint="@color/material_dynamic_neutral30"
-                android:textSize="25sp" />
-
             <Button
-                android:id="@+id/registrarBtn"
+                android:id="@+id/reestablecer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Registrarse"
                 android:layout_gravity="center"
-                android:onClick="registrarse"
-                android:backgroundTint="#46A2AE">
+                android:layout_marginTop="30dp"
+                android:backgroundTint="#46A2AE"
+                android:onClick="reestablecerContra"
+                android:text="Reestablecer contraseña">
+
             </Button>
 
         </LinearLayout>
@@ -122,11 +84,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="end"
             android:layout_below="@+id/datos"
-            >
-        </LinearLayout>
+            android:gravity="end"></LinearLayout>
 
     </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
