@@ -5,11 +5,17 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TimePicker
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 class AltaMedicamento : AppCompatActivity() {
+
+    private val horasList = mutableListOf<String>()
+    private lateinit var horasAdapter: ListaHorasAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +37,9 @@ class AltaMedicamento : AppCompatActivity() {
         val stock = findViewById<EditText>(R.id.cantidad).text
         val agregarBtn = findViewById<Button>(R.id.agregarBtn)
         val guardarBtn = findViewById<Button>(R.id.guardarBtn)
+        val timePicker: TimePicker = findViewById(R.id.timePicker)
+
+
 
         arrowBack.setOnClickListener{
             finish()
@@ -76,6 +85,24 @@ class AltaMedicamento : AppCompatActivity() {
             }
         }
 
+        agregarBtn.setOnClickListener {
+            val horaSeleccionada = String.format(
+                "%02d:%02d",
+                timePicker.currentHour,
+                timePicker.currentMinute
+            )
+            horasList.add(horaSeleccionada)
+            setupRecyclerView(horasList)
+        }
+
+    }
+
+    private fun setupRecyclerView(horasList : List<String>) {
+        val recyclerView = findViewById<RecyclerView>(R.id.RecyclerView_hora)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        val adapter = ListaHorasAdapter(horasList)
+        recyclerView.adapter = adapter
     }
 
 }
