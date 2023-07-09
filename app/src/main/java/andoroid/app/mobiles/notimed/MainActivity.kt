@@ -25,9 +25,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
         bottomNavigationView.setOnItemSelectedListener { item ->
-            BottomNavigationHandler.handleNavigationItemSelected(this, item)
+            BottomNavigationHandler.handleNavigationItemSelected(this,bottomNavigationView, item)
             true
         }
 

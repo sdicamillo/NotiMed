@@ -22,7 +22,7 @@ class ListaMedicamentos : AppCompatActivity() {
         setContentView(R.layout.activity_lista_medicamentos)
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.setOnItemSelectedListener { item ->
-            BottomNavigationHandler.handleNavigationItemSelected(this, item)
+            BottomNavigationHandler.handleNavigationItemSelected(this,bottomNavigationView, item)
             true
         }
         obtenerMedicamentos()
