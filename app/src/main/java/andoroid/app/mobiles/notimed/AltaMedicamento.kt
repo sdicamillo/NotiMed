@@ -34,7 +34,8 @@ class AltaMedicamento : AppCompatActivity() {
     private fun setup(){
         val arrowBack = findViewById<ImageButton>(R.id.backButton)
         val nombre = findViewById<EditText>(R.id.nombreMed).text
-        val stock = findViewById<EditText>(R.id.cantidad).text
+        val dosis = findViewById<EditText>(R.id.dosis).text
+        val stock = findViewById<EditText>(R.id.stock).text
         val agregarBtn = findViewById<Button>(R.id.agregarBtn)
         val guardarBtn = findViewById<Button>(R.id.guardarBtn)
         val timePicker: TimePicker = findViewById(R.id.timePicker)
@@ -61,6 +62,7 @@ class AltaMedicamento : AppCompatActivity() {
                     showAlert("Debe ingresar los datos")
                 } else {
                     medData["name"] = nombre.toString()
+                    medData["dosis"] = dosis.toString()
                     medData["stock"] = stock.toString()
 
 
