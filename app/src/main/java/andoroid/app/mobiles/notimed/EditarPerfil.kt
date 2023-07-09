@@ -1,5 +1,6 @@
 package andoroid.app.mobiles.notimed
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -39,6 +40,7 @@ class EditarPerfil : AppCompatActivity() {
             if (name != null && email != null){
                 println("perisitir fun")
                 persistirPerfil(nameView.text.toString())
+                showMain()
             } else{
                 println("error")
             }
@@ -67,6 +69,12 @@ class EditarPerfil : AppCompatActivity() {
             println("El usuario no ha iniciado sesión")
         }
 
+    }
+
+    private fun showMain(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finishAffinity()
     }
 
 }

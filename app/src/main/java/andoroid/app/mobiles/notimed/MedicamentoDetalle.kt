@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -72,22 +73,38 @@ class MedicamentoDetalle : AppCompatActivity() {
                 // Obtén una referencia al nodo del medicamento específico
                 val medicationRef = userRef.child("medicamentos").child(id.toString())
 
-                // Elimina el medicamento de la base de datos
-                medicationRef.removeValue()
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            // El medicamento se ha eliminado exitosamente
-                            println("Medicamento eliminado correctamente")
-                        } else {
-                            // Hubo un error al eliminar el medicamento
-                            println("Error al eliminar el medicamento: ${task.exception?.message}")
-                        }
+                // Mostrar el diálogo de confirmación
+                MaterialAlertDialogBuilder(this)
+                    .setTitle("Confirmación")
+                    .setMessage("¿Estás seguro de que deseas eliminar este medicamento?")
+                    .setPositiveButton("Aceptar") { dialog, which ->
+                        // Eliminar el medicamento de la base de datos
+                        medicationRef.removeValue()
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    // El medicamento se ha eliminado exitosamente
+                                    println("Medicamento eliminado correctamente")
+                                    showMain()
+                                } else {
+                                    // Hubo un error al eliminar el medicamento
+                                    println("Error al eliminar el medicamento: ${task.exception?.message}")
+                                }
+                            }
                     }
+                    .setNegativeButton("Cancelar") { dialog, which ->
+                        // Acción a realizar si el usuario cancela la eliminación del medicamento
+                    }
+                    .show()
+
             }
 
         }
-
-
-
     }
+
+    private fun showMain(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
 }

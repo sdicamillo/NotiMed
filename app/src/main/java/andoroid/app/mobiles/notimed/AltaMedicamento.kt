@@ -81,7 +81,7 @@ class AltaMedicamento : AppCompatActivity() {
                             .addOnSuccessListener {
                                 println("Medicamento agregado correctamente")
                                 setearAlarmas()
-                                finish()
+                                showMain()
                             }
                             .addOnFailureListener { exception ->
                                 println("Error al agregar el medicamento: $exception")
@@ -137,4 +137,11 @@ class AltaMedicamento : AppCompatActivity() {
         val adapter = ListaHorasAdapter(horasList)
         recyclerView.adapter = adapter
     }
+
+    private fun showMain(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
 }
