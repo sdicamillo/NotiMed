@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="andoroid.app.mobiles.notimed">
-    <uses-permission android:name="android.permission.SET_ALARM" />
+
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -42,6 +43,8 @@
             android:name=".Perfil"
             android:exported="false" />
         <activity
+            android:name=".Alarm_Launch"/>
+        <activity
             android:name=".LogIn"
             android:exported="true">
             <intent-filter>
@@ -50,6 +53,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".AlarmReceiver"/>
     </application>
 
 </manifest>

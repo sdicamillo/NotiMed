@@ -80,7 +80,7 @@ class AltaMedicamento : AppCompatActivity() {
                         medicamentosRef.child(medicamentoKey.toString()).setValue(medData)
                             .addOnSuccessListener {
                                 println("Medicamento agregado correctamente")
-                                setearAlarmas()
+                                setearAlarmas(nombre.toString())
                                 showMain()
                             }
                             .addOnFailureListener { exception ->
@@ -104,33 +104,21 @@ class AltaMedicamento : AppCompatActivity() {
             setupRecyclerView(horasList)
         }
     }
-    private fun setearAlarmas() {
+    private fun setearAlarmas(nombre: String) {
+        val alarmScheduler = AndroidAlarmScheduler(this)
         for (horaSeleccionada in horasList) {
-            val formatoHora = SimpleDateFormat("HH:mm", Locale.getDefault())
-            val calendar = Calendar.getInstance()
-            val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            try {
-                val date = formatoHora.parse(horaSeleccionada)
-                calendar.time = date
-                val intent = Intent(this, AlarmReceiver::class.java)
-                val pendingIntent = PendingIntent.getBroadcast(
-                    this,
-                    0,
-                    intent,
-                    PendingIntent.FLAG_IMMUTABLE
-                )
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
-
-                Toast.makeText(
-                    this,
-                    "Alarma configurada para $horaSeleccionada",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } catch (e: ParseException) {
-                e.printStackTrace()
+            val partesHora = horaSeleccionada.split(":")
+            if (partesHora.size == 2) {
+                val hora = partesHora[0].toIntOrNull()
+                val minuto = partesHora[1].toIntOrNull()
+                if (hora != null && minuto != null) {
+                    val alarmItem = AlarmItem(hour = hora, minute = minuto, message = "¡Es hora de tomar $nombre!")
+                    alarmScheduler.schedule(alarmItem)
+                }
             }
         }
     }
+
     private fun setupRecyclerView(horasList : List<String>) {
         val recyclerView = findViewById<RecyclerView>(R.id.RecyclerView_hora)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -143,5 +131,4 @@ class AltaMedicamento : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
 }
