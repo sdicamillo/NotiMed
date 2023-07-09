@@ -3,6 +3,7 @@ package andoroid.app.mobiles.notimed
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -25,6 +26,11 @@ class EditarPerfil : AppCompatActivity() {
         val nameView = findViewById<TextView>(R.id.nombre)
         val emailView = findViewById<TextView>(R.id.email)
         val guardarbtn = findViewById<Button>(R.id.guardarBtn)
+        val arrowBack = findViewById<ImageButton>(R.id.backButton)
+
+        arrowBack.setOnClickListener{
+            finish()
+        }
 
         nameView.text = name
         emailView.text = email

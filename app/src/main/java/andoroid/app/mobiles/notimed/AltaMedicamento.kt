@@ -1,16 +1,25 @@
 package andoroid.app.mobiles.notimed
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TimePicker
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class AltaMedicamento : AppCompatActivity() {
 
@@ -40,8 +49,6 @@ class AltaMedicamento : AppCompatActivity() {
         val guardarBtn = findViewById<Button>(R.id.guardarBtn)
         val timePicker: TimePicker = findViewById(R.id.timePicker)
 
-
-
         arrowBack.setOnClickListener{
             finish()
         }
@@ -65,7 +72,6 @@ class AltaMedicamento : AppCompatActivity() {
                     medData["dosis"] = dosis.toString()
                     medData["stock"] = stock.toString()
 
-
                     // Generar una clave única para el nuevo medicamento
                     val medicamentoKey = medicamentosRef.push().key
 
@@ -74,6 +80,7 @@ class AltaMedicamento : AppCompatActivity() {
                         medicamentosRef.child(medicamentoKey.toString()).setValue(medData)
                             .addOnSuccessListener {
                                 println("Medicamento agregado correctamente")
+                                setearAlarmas()
                                 finish()
                             }
                             .addOnFailureListener { exception ->
@@ -96,15 +103,38 @@ class AltaMedicamento : AppCompatActivity() {
             horasList.add(horaSeleccionada)
             setupRecyclerView(horasList)
         }
-
     }
+    private fun setearAlarmas() {
+        for (horaSeleccionada in horasList) {
+            val formatoHora = SimpleDateFormat("HH:mm", Locale.getDefault())
+            val calendar = Calendar.getInstance()
+            val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            try {
+                val date = formatoHora.parse(horaSeleccionada)
+                calendar.time = date
+                val intent = Intent(this, AlarmReceiver::class.java)
+                val pendingIntent = PendingIntent.getBroadcast(
+                    this,
+                    0,
+                    intent,
+                    PendingIntent.FLAG_IMMUTABLE
+                )
+                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
 
+                Toast.makeText(
+                    this,
+                    "Alarma configurada para $horaSeleccionada",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+        }
+    }
     private fun setupRecyclerView(horasList : List<String>) {
         val recyclerView = findViewById<RecyclerView>(R.id.RecyclerView_hora)
         recyclerView.layoutManager = LinearLayoutManager(this)
-
         val adapter = ListaHorasAdapter(horasList)
         recyclerView.adapter = adapter
     }
-
 }

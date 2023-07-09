@@ -67,14 +67,14 @@
             android:backgroundTint="#2196F3"
             android:text="+"
             android:textColor="#FFFFFF"
-            android:textSize="34sp"
-            android:onClick="showAlta"/>
+            android:textSize="34sp"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
+        style="@style/NoShadowBottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -84,7 +84,8 @@
         app:itemTextColor="#000000"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/bottom_navigation_menu"
+        android:minHeight="74dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

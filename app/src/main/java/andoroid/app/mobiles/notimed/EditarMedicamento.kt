@@ -3,6 +3,7 @@ package andoroid.app.mobiles.notimed
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,14 +15,6 @@ class EditarMedicamento : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.editar_medicamento)
-
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            BottomNavigationHandler.handleNavigationItemSelected(this, item)
-            true
-        }
-
         //SETUP
         setup()
     }
@@ -40,6 +33,11 @@ class EditarMedicamento : AppCompatActivity() {
         val nameView = findViewById<TextView>(R.id.nombreEditar)
         val dosisView = findViewById<TextView>(R.id.dosisEditar)
         val stockView = findViewById<TextView>(R.id.stockEditar)
+        val arrowBack = findViewById<ImageButton>(R.id.backButton)
+
+        arrowBack.setOnClickListener{
+            finish()
+        }
 
         nameView.text = name
         dosisView.text = dosis

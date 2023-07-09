@@ -21,9 +21,8 @@ class Perfil : AppCompatActivity() {
         setContentView(R.layout.perfil)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
         bottomNavigationView.setOnItemSelectedListener { item ->
-            BottomNavigationHandler.handleNavigationItemSelected(this, item)
+            BottomNavigationHandler.handleNavigationItemSelected(this,bottomNavigationView, item)
             true
         }
 
