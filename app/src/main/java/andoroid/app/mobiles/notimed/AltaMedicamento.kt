@@ -65,7 +65,7 @@ class AltaMedicamento : AppCompatActivity() {
                 //Crea un objeto para guardar los datos del nuevo medicamento
                 val medData = HashMap<String, Any>()
 
-                if (nombre.isEmpty() || stock.isEmpty()) {
+                if (nombre.isEmpty() || stock.isEmpty() || dosis.isEmpty()) {
                     showAlert("Debe ingresar los datos")
                 } else {
                     medData["name"] = nombre.toString()
@@ -80,7 +80,30 @@ class AltaMedicamento : AppCompatActivity() {
                         medicamentosRef.child(medicamentoKey.toString()).setValue(medData)
                             .addOnSuccessListener {
                                 println("Medicamento agregado correctamente")
-                                setearAlarmas(nombre.toString())
+                                val horariosRef = medicamentosRef.child(medicamentoKey).child("horarios")
+
+                                //agregado de horarios a la bd
+                                for (hora in horasList){
+                                    // Generar una clave única para el nuevo horario
+                                    val horarioKey = horariosRef.push().key
+
+                                    //Crea un objeto para guardar los datos del nuevo medicamento
+                                    val horarioData = HashMap<String, Any>()
+
+                                    horarioData["hora"] = hora
+
+                                    if (horarioKey != null){
+                                        horariosRef.child(horarioKey.toString()).setValue(horarioData).addOnCompleteListener{
+                                            setearAlarmas(nombre.toString())
+                                        }
+                                            .addOnFailureListener { exception ->
+                                                println("Error al agregar el medicamento: $exception")
+                                                showAlert(exception.toString())
+                                            }
+
+                                    }
+
+                                }
                                 showMain()
                             }
                             .addOnFailureListener { exception ->
