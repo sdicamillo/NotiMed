@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MedicamentoAdapter(private val medicamentos: List<Medicamento>) : RecyclerView.Adapter<MedicamentoAdapter.MedicamentoViewHolder>() {
+class MedicamentoAdapter(private val medicamentos: List<MedicamentoHorario>) : RecyclerView.Adapter<MedicamentoAdapter.MedicamentoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicamentoViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_medicamento, parent, false)
@@ -28,12 +28,14 @@ class MedicamentoAdapter(private val medicamentos: List<Medicamento>) : Recycler
         val nombreTextView: TextView = itemView.findViewById(R.id.nombreMed)
         val dosisTextView: TextView = itemView.findViewById(R.id.dosisMed)
         val stockTextView: TextView = itemView.findViewById(R.id.stockMed)
+        val horaTextView: TextView = itemView.findViewById(R.id.hora)
 
 
-        fun bind(medicamento: Medicamento){
+        fun bind(medicamento: MedicamentoHorario){
             nombreTextView.text = medicamento.name
             dosisTextView.text = medicamento.dosis
             stockTextView.text = medicamento.stock
+            horaTextView.text = medicamento.horario
 
             //abre el detalle del medicamento
             itemView.setOnClickListener{

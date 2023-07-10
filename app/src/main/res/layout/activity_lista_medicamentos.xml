@@ -37,14 +37,15 @@
 
     </LinearLayout>
 
+
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="90dp"
+        android:layout_marginBottom="75dp"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -52,8 +53,28 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/altaMedicamento_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="100dp"
+            android:backgroundTint="#2196F3"
+            android:text="+"
+            android:textColor="#FFFFFF"
+            android:textSize="34sp"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
+        style="@style/NoShadowBottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -63,7 +84,8 @@
         app:itemTextColor="#000000"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/bottom_navigation_menu"
+        android:minHeight="74dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

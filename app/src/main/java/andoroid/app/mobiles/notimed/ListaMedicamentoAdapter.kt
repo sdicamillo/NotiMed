@@ -16,7 +16,6 @@ class ListaMedicamentoAdapter(private val medicamentos: List<Medicamento>) : Rec
 
     override fun onBindViewHolder(holder: MedicamentoViewHolder, position: Int) {
         val medicamento = medicamentos[position]
-
         holder.bind(medicamento)
     }
 

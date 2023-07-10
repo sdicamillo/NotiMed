@@ -7,7 +7,7 @@
     android:background="@color/fondo">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/backButton"
         android:layout_width="48dp"
         android:layout_height="43dp"
         android:layout_marginStart="10dp"
@@ -20,11 +20,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView2"
@@ -48,13 +48,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout">
 
         <TextView
@@ -63,7 +60,8 @@
             android:layout_height="wrap_content"
             android:text="Medicamento:"
             android:textColor="#000000"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+        />
 
         <EditText
             android:id="@+id/nombreEditar"
@@ -71,7 +69,7 @@
             android:layout_height="wrap_content"
             android:text="MEDICAMENTO1"
             android:textColor="#FFFFFF"
-            android:textSize="40sp" />
+            android:ems="10"/>
 
         <TextView
             android:id="@+id/textView4"
@@ -89,7 +87,7 @@
             android:layout_weight="1"
             android:text="1"
             android:textColor="#FFFFFF"
-            android:textSize="40sp" />
+            android:ems="10" />
 
         <TextView
             android:id="@+id/textView8"
@@ -106,28 +104,69 @@
             android:layout_weight="1"
             android:text="23"
             android:textColor="#FFFFFF"
-            android:textSize="40sp" />
+            android:ems="10" />
+
+        <TextView
+        android:id="@+id/textView18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Tiempo:"
+        android:textColor="#000000"
+        android:textSize="15sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TimePicker
+                android:id="@+id/timePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner" />
+
+            <Button
+                android:id="@+id/agregarBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#3F51B5"
+                android:text="Agregar"
+                android:textColorHighlight="#3F51B5"
+                android:textColorLink="#3F51B5" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerView_hora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout">
 
         <Button
             android:id="@+id/guardarBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Guardar" />
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|center_horizontal"
+            android:backgroundTint="#4CAF50"
+            android:text="Guardar"
+            android:textSize="20sp" />
 
     </LinearLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="#ffffff"
-        app:itemIconSize="40dp"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="#000000"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

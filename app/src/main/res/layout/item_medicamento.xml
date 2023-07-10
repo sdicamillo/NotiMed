@@ -21,31 +21,16 @@
             <TextView
                 android:id="@+id/hora"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
                 android:layout_marginBottom="1dp"
+                android:gravity="center"
                 android:text="8:00"
                 android:textColor="#FFFFFFFF"
                 android:textSize="34sp" />
 
-            <TextView
-                android:id="@+id/dia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginBottom="5dp"
-                android:text="Martes"
-                android:textColor="#FFFFFFFF"
-                android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="12 Abril 20203"
-                android:textColor="#FFFFFFFF"
-                android:textSize="16sp" />
         </LinearLayout>
 
         <View
@@ -55,7 +40,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -69,23 +54,60 @@
                 android:textColor="#FFFFFFFF"
                 android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/stockMed"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginBottom="10dp"
-                android:text="Stock: 10"
-                android:textColor="#FFFFFFFF"
-                android:textSize="16sp" />
-            <TextView
-                android:id="@+id/dosisMed"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:text="Dosis:"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/dosisMed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:text="1"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="Dosis: 1"
-                android:textColor="#FFFFFFFF"
-                android:textSize="16sp" />
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:text="Stock:"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/stockMed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:text="10"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="16sp" />
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

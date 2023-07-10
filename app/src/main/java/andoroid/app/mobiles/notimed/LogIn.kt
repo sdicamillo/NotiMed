@@ -93,80 +93,84 @@ class LogIn : AppCompatActivity() {
         }
 
         private fun showMain(){
-            //cambiar AltaMedicamento por Perfil
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finishAffinity()
         }
 
 
-    //Inicio de sesión de google
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == GOOGLE_SIGN_IN){
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                val account = task.getResult(ApiException::class.java)
-                if (account != null){
-                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-                    FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            persistirUsuario()
-                            showMain()
-                        } else {
-                            showAlert(it.exception?.message.toString())
+        //Inicio de sesión de google
+        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+            super.onActivityResult(requestCode, resultCode, data)
+            if (requestCode == GOOGLE_SIGN_IN){
+                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                try {
+                    val account = task.getResult(ApiException::class.java)
+                    if (account != null){
+                        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                        FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
+                            if (it.isSuccessful) {
+                                persistirUsuario()
+                                showMain()
+                            } else {
+                                showAlert(it.exception?.message.toString())
+                            }
                         }
                     }
+                } catch (e: ApiException){
+                    showAlert(e.toString())
                 }
-            } catch (e: ApiException){
-                showAlert(e.toString())
             }
         }
-    }
 
-    private fun persistirUsuario(){
-        // Obtén una instancia de FirebaseAuth
-        val firebaseAuth = FirebaseAuth.getInstance()
+        private fun persistirUsuario(){
+            // Obtén una instancia de FirebaseAuth
+            val firebaseAuth = FirebaseAuth.getInstance()
 
-        // Obtén el usuario autenticado actual
-        val user = firebaseAuth.currentUser
+            // Obtén el usuario autenticado actual
+            val user = firebaseAuth.currentUser
 
-        // Crea una referencia a la base de datos
-        val database = FirebaseDatabase.getInstance()
-        val usersRef = database.getReference("users")
+            // Crea una referencia a la base de datos
+            val database = FirebaseDatabase.getInstance()
+            val usersRef = database.getReference("users")
 
 
-        if (user != null) {
-            usersRef.child(user.uid).addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        println("existe")
+            if (user != null) {
+                usersRef.child(user.uid).addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            println("existe")
 
-                    } else {
-                        // El usuario no existe en la base de datos
-                        // Obtén los datos del usuario
-                        val userId = user?.uid
-                        val userEmail = user?.email
-                        val userName = user?.displayName
+                        } else {
+                            // El usuario no existe en la base de datos
+                            // Obtén los datos del usuario
+                            val userId = user?.uid
+                            val userEmail = user?.email
+                            val userName = user?.displayName
 
-                        // Crea un objeto para guardar los datos del usuario
-                        val userData = HashMap<String, Any>()
-                        userData["email"] = userEmail ?: ""
-                        userData["name"] = userName ?: ""
+                            // Crea un objeto para guardar los datos del usuario
+                            val userData = HashMap<String, Any>()
+                            userData["email"] = userEmail ?: ""
+                            userData["name"] = userName ?: ""
 
-                        // Guarda los datos del usuario en la base de datos
-                        usersRef.child(userId ?: "").setValue(userData)
-                        println("El usuario no existe")
+                            // Guarda los datos del usuario en la base de datos
+                            usersRef.child(userId ?: "").setValue(userData)
+                            println("El usuario no existe")
+                        }
                     }
-                }
 
-                override fun onCancelled(databaseError: DatabaseError) {
-                    // Ocurrió un error al realizar la consulta
-                    println("Error al consultar la base de datos: ${databaseError.message}")
-                }
-            })
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        // Ocurrió un error al realizar la consulta
+                        println("Error al consultar la base de datos: ${databaseError.message}")
+                    }
+                })
+            }
+
         }
 
-    }
+        fun reestablerContra(view: View){
+            val intent = Intent(this, ReestablerContra::class.java)
+            startActivity(intent)
+        }
 
 }
