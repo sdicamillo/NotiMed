@@ -28,12 +28,14 @@ class MedicamentoAdapter(private val medicamentos: List<Medicamento>) : Recycler
         val nombreTextView: TextView = itemView.findViewById(R.id.nombreMed)
         val dosisTextView: TextView = itemView.findViewById(R.id.dosisMed)
         val stockTextView: TextView = itemView.findViewById(R.id.stockMed)
+        val horaTextView: TextView = itemView.findViewById(R.id.hora)
 
 
         fun bind(medicamento: Medicamento){
             nombreTextView.text = medicamento.name
             dosisTextView.text = medicamento.dosis
             stockTextView.text = medicamento.stock
+            //horaTextView.text = medicamento.hora
 
             //abre el detalle del medicamento
             itemView.setOnClickListener{

@@ -71,6 +71,7 @@ class AltaMedicamento : AppCompatActivity() {
                     medData["name"] = nombre.toString()
                     medData["dosis"] = dosis.toString()
                     medData["stock"] = stock.toString()
+                    medData["horarios"] = horasList
 
                     // Generar una clave única para el nuevo medicamento
                     val medicamentoKey = medicamentosRef.push().key
@@ -80,30 +81,7 @@ class AltaMedicamento : AppCompatActivity() {
                         medicamentosRef.child(medicamentoKey.toString()).setValue(medData)
                             .addOnSuccessListener {
                                 println("Medicamento agregado correctamente")
-                                val horariosRef = medicamentosRef.child(medicamentoKey).child("horarios")
-
-                                //agregado de horarios a la bd
-                                for (hora in horasList){
-                                    // Generar una clave única para el nuevo horario
-                                    val horarioKey = horariosRef.push().key
-
-                                    //Crea un objeto para guardar los datos del nuevo medicamento
-                                    val horarioData = HashMap<String, Any>()
-
-                                    horarioData["hora"] = hora
-
-                                    if (horarioKey != null){
-                                        horariosRef.child(horarioKey.toString()).setValue(horarioData).addOnCompleteListener{
-                                            setearAlarmas(nombre.toString())
-                                        }
-                                            .addOnFailureListener { exception ->
-                                                println("Error al agregar el medicamento: $exception")
-                                                showAlert(exception.toString())
-                                            }
-
-                                    }
-
-                                }
+                                setearAlarmas(nombre.toString())
                                 showMain()
                             }
                             .addOnFailureListener { exception ->

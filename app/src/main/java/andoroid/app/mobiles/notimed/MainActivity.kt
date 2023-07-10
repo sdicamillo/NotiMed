@@ -1,7 +1,6 @@
 package andoroid.app.mobiles.notimed
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -65,12 +64,23 @@ class MainActivity : AppCompatActivity() {
                         val medDosis = medicamentoSnapshot.child("dosis").getValue(String::class.java)
                         val medStock = medicamentoSnapshot.child("stock").getValue(String::class.java)
 
+                        val horariosList = mutableListOf<String>()
 
-                        if (medId != null && medName != null && medDosis != null && medStock != null){
-                            val medicamento = Medicamento(medId, medName, medDosis, medStock)
+                        val horariosSnapshot = medicamentoSnapshot.child("horarios")
+                        for (horarioSnapshot in horariosSnapshot.children) {
+                            val medHorario = horarioSnapshot.child("hora").getValue(String::class.java)
+                            medHorario?.let { horariosList.add(it) }
+                        }
+
+                        if (medId != null && medName != null && medDosis!= null && medStock != null){
+                            val medicamento = Medicamento(medId, medName, medDosis, medStock, horariosList)
                             medicamentosList.add(medicamento)
                         }
-                    }
+
+                    mostrarMedicamentos(medicamentosList)
+                }
+
+
 
                     mostrarMedicamentos(medicamentosList)
                 }
