@@ -1,17 +1,27 @@
 package andoroid.app.mobiles.notimed
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class MedicamentoDetalle : AppCompatActivity() {
+
+    private val horariosList = mutableListOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detalle_medicamentos)
@@ -37,6 +47,10 @@ class MedicamentoDetalle : AppCompatActivity() {
         dosisView.text = dosis
         stockView.text = stock
 
+        if (id != null) {
+            mostrarHoras(id)
+        }
+
         //cambio de pantalla a editar
         editarBtn.setOnClickListener{
             val intent = Intent(this, EditarMedicamento::class.java)
@@ -44,6 +58,7 @@ class MedicamentoDetalle : AppCompatActivity() {
             intent.putExtra("name", name)
             intent.putExtra("dosis", dosis)
             intent.putExtra("stock", stock)
+            intent.putExtra("listaHorarios", ArrayList(horariosList))
             startActivity(intent)
         }
 
@@ -99,6 +114,42 @@ class MedicamentoDetalle : AppCompatActivity() {
             }
 
         }
+    }
+
+    private fun mostrarHoras(medId : String){
+        val database = FirebaseDatabase.getInstance()
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val uid = currentUser?.uid
+
+        if (uid != null) {
+            val horariosRef = database.getReference("users").child(uid).child("medicamentos").child(medId).child("horarios")
+
+
+            horariosRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (horarioSnapshot in dataSnapshot.children) {
+
+                        val horario = horarioSnapshot.getValue(String::class.java)
+                        if (horario != null) {
+                            horariosList.add(horario)
+                        }
+                    }
+                    setupRecyclerView(horariosList)
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Manejar el error en caso de que ocurra
+                }
+            })
+
+        }
+
+    }
+
+    private fun setupRecyclerView(horasList : List<String>) {
+        val recyclerView = findViewById<RecyclerView>(R.id.RecyclerView_hora)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        val adapter = ListaHorasAdapter(horasList)
+        recyclerView.adapter = adapter
     }
 
     private fun showMain(){

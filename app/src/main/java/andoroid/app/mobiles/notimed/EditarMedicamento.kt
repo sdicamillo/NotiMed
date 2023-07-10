@@ -7,6 +7,8 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -28,6 +30,14 @@ class EditarMedicamento : AppCompatActivity() {
         val name = intent.getStringExtra("name")
         val dosis = intent.getStringExtra("dosis")
         val stock = intent.getStringExtra("stock")
+        val horariosList = intent.getStringArrayListExtra("listaHorarios")
+        println("HOLAAAAAA")
+        println(horariosList)
+
+        if (horariosList != null) {
+            setupRecyclerView(horariosList)
+        }
+
 
         //controles
         val nameView = findViewById<TextView>(R.id.nombreEditar)
@@ -52,6 +62,13 @@ class EditarMedicamento : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun setupRecyclerView(horasList : List<String>) {
+        val recyclerView = findViewById<RecyclerView>(R.id.RecyclerView_hora)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        val adapter = ListaHorasBorrarAdapter(horasList)
+        recyclerView.adapter = adapter
     }
 
     private fun persistirMedicamento(medId: String, medName:String, medDosis:String, medStock:String ){

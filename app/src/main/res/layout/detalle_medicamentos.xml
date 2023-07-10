@@ -48,6 +48,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout7"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -121,13 +122,40 @@
             android:textColor="#FFFFFF"
             android:textSize="40sp" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerView_hora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout">
+
         <Button
             android:id="@+id/editarBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Editar" />
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|center_horizontal"
+            android:backgroundTint="#4CAF50"
+            android:text="Editar"
+            android:textSize="20sp" />
 
     </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

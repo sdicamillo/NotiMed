@@ -12,6 +12,7 @@
         android:ems="5"
         android:hint="12:00"
         android:inputType="time"
+        android:textAlignment="center"
         android:textSize="30sp" />
 
 </LinearLayout>
