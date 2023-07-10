@@ -63,7 +63,7 @@ class ListaMedicamentos : AppCompatActivity() {
                         }
                     }
 
-                    mostrarMedicamentos(medicamentosList)
+                    mostrarMedicamentos(medicamentosList.sortedBy { it.name })
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
