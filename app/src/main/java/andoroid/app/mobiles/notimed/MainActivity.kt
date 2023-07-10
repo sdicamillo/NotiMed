@@ -1,8 +1,10 @@
 package andoroid.app.mobiles.notimed
 
 import android.content.Context
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -12,6 +14,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.text.SimpleDateFormat
+import java.time.LocalTime
+import java.util.Locale
 
 
 class MainActivity : AppCompatActivity() {
@@ -56,6 +61,7 @@ class MainActivity : AppCompatActivity() {
             val medicamentosList = mutableListOf<Medicamento>()
 
             medicamentosRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                @RequiresApi(Build.VERSION_CODES.O)
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (medicamentoSnapshot in dataSnapshot.children) {
 
@@ -68,21 +74,18 @@ class MainActivity : AppCompatActivity() {
 
                         val horariosSnapshot = medicamentoSnapshot.child("horarios")
                         for (horarioSnapshot in horariosSnapshot.children) {
-                            val medHorario = horarioSnapshot.child("hora").getValue(String::class.java)
-                            medHorario?.let { horariosList.add(it) }
+                            val medHorario = horarioSnapshot.getValue(String::class.java)
+                            if (medHorario != null) {
+                                horariosList.add(medHorario)
+                            }
                         }
 
                         if (medId != null && medName != null && medDosis!= null && medStock != null){
                             val medicamento = Medicamento(medId, medName, medDosis, medStock, horariosList)
                             medicamentosList.add(medicamento)
                         }
-
-                    mostrarMedicamentos(medicamentosList)
-                }
-
-
-
-                    mostrarMedicamentos(medicamentosList)
+                    }
+                    adaptarLista(medicamentosList)
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
@@ -93,7 +96,44 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun mostrarMedicamentos(medicamentosList: List<Medicamento>){
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun adaptarLista(medicamentosList: List<Medicamento>){
+        val nuevaListaMedicamentos: List<MedicamentoHorario> = medicamentosList.flatMap { medicamento ->
+            medicamento.horarios.map { horario ->
+                MedicamentoHorario(medicamento.id, medicamento.name, medicamento.dosis, medicamento.stock, horario)
+            }
+        }
+
+        println("hola")
+        println(nuevaListaMedicamentos)
+
+
+        val currentTime = LocalTime.now()
+
+        println(currentTime)
+
+        val listaOrdenada = nuevaListaMedicamentos.sortedBy { medicamento ->
+            val horario = LocalTime.parse(medicamento.horario)
+            val diferencia = horario.hour * 60 + horario.minute - (currentTime.hour * 60 + currentTime.minute)
+            if (diferencia < 0) diferencia + 24 * 60 else diferencia
+        }
+
+
+        mostrarMedicamentos(listaOrdenada)
+
+    }
+
+    // Función para convertir una cadena de horario a un timestamp
+    fun convertToTimestamp(horario: String): Long {
+        // Implementa la lógica para convertir la cadena de horario a un timestamp
+        // Puedes utilizar SimpleDateFormat u otras clases de manejo de fechas y horarios en Kotlin
+        // En este ejemplo, se utiliza un formato de horario "HH:mm" y se convierte a un timestamp
+        val format = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val date = format.parse(horario)
+        return date?.time ?: 0
+    }
+
+    private fun mostrarMedicamentos(medicamentosList: List<MedicamentoHorario>){
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
