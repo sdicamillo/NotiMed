@@ -31,17 +31,6 @@ class ListaHorasAdapter(private val horas: List<String>) : RecyclerView.Adapter<
 
         fun bind(hora: String){
             horaTextView.text = hora.toString()
-
-            /*abre el detalle del medicamento
-            itemView.setOnClickListener{
-                val context = itemView.context
-                val intent = Intent(context, MedicamentoDetalle::class.java)
-                intent.putExtra("id", medicamento.id)
-                intent.putExtra("name", medicamento.name)
-                intent.putExtra("stock", medicamento.stock)
-                context.startActivity(intent)
-            }*/
-
         }
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,20 +31,20 @@ class EditarMedicamento : AppCompatActivity() {
         val name = intent.getStringExtra("name")
         val dosis = intent.getStringExtra("dosis")
         val stock = intent.getStringExtra("stock")
-        val horariosList = intent.getStringArrayListExtra("listaHorarios")
-        println("HOLAAAAAA")
-        println(horariosList)
+        val horariosList = intent.getStringArrayListExtra("listaHorarios") as MutableList<String>
+
 
         if (horariosList != null) {
             setupRecyclerView(horariosList)
         }
-
 
         //controles
         val nameView = findViewById<TextView>(R.id.nombreEditar)
         val dosisView = findViewById<TextView>(R.id.dosisEditar)
         val stockView = findViewById<TextView>(R.id.stockEditar)
         val arrowBack = findViewById<ImageButton>(R.id.backButton)
+        val agregarBtn = findViewById<Button>(R.id.agregarBtn)
+        val timePicker: TimePicker = findViewById(R.id.timePicker)
 
         arrowBack.setOnClickListener{
             finish()
@@ -53,10 +54,25 @@ class EditarMedicamento : AppCompatActivity() {
         dosisView.text = dosis
         stockView.text = stock
 
+        agregarBtn.setOnClickListener {
+            val horaSeleccionada = String.format(
+                "%02d:%02d",
+                timePicker.currentHour,
+                timePicker.currentMinute
+            )
+
+            horariosList.add(horaSeleccionada)
+            setupRecyclerView(horariosList)
+        }
+
         guardarbtn.setOnClickListener {
+            println(id)
+            println(name)
+            println(dosis)
+            println(stock)
             if (id != null && name != null && dosis != null && stock != null) {
                 println("perisitir fun")
-                persistirMedicamento(id, nameView.text.toString(), dosisView.text.toString(), stockView.text.toString())
+                persistirMedicamento(id, nameView.text.toString(), dosisView.text.toString(), stockView.text.toString(), horariosList)
             } else{
                 println("error")
             }
@@ -64,14 +80,14 @@ class EditarMedicamento : AppCompatActivity() {
 
     }
 
-    private fun setupRecyclerView(horasList : List<String>) {
+    private fun setupRecyclerView(horasList : MutableList<String>) {
         val recyclerView = findViewById<RecyclerView>(R.id.RecyclerView_hora)
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = ListaHorasBorrarAdapter(horasList)
         recyclerView.adapter = adapter
     }
 
-    private fun persistirMedicamento(medId: String, medName:String, medDosis:String, medStock:String ){
+    private fun persistirMedicamento(medId: String, medName:String, medDosis:String, medStock:String, horariosList: MutableList<String> ){
 
         val currentUser = FirebaseAuth.getInstance().currentUser
         val uid = currentUser?.uid
@@ -86,11 +102,13 @@ class EditarMedicamento : AppCompatActivity() {
             medData["name"] = medName
             medData["stock"] = medStock
             medData["dosis"] = medDosis
+            medData["horarios"] = horariosList
 
             // Guardar el medicamento en la base de datos
             medicamentosRef.setValue(medData)
                 .addOnSuccessListener {
                     println("Medicamento agregado correctamente")
+                    showMed()
                 }
                 .addOnFailureListener { exception ->
                     println("Error al agregar el medicamento: $exception")
@@ -102,6 +120,11 @@ class EditarMedicamento : AppCompatActivity() {
 
     }
 
+    private fun showMed(){
+        val intent = Intent(this, ListaMedicamentos::class.java)
+        startActivity(intent)
+        finish()
+    }
 
 
 

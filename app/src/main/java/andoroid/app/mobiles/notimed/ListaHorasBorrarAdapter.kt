@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.sql.Time
 import java.util.Timer
 
-class ListaHorasBorrarAdapter(private val horasParametro: List<String>) : RecyclerView.Adapter<ListaHorasBorrarAdapter.HoraViewHolder>() {
-
-    private val horas = horasParametro.toMutableList()
+class ListaHorasBorrarAdapter(private val horas: MutableList<String>) : RecyclerView.Adapter<ListaHorasBorrarAdapter.HoraViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoraViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.hora_borrar, parent, false)
