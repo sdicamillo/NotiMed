@@ -65,7 +65,7 @@ class AltaMedicamento : AppCompatActivity() {
                 //Crea un objeto para guardar los datos del nuevo medicamento
                 val medData = HashMap<String, Any>()
 
-                if (nombre.isEmpty() || stock.isEmpty() || dosis.isEmpty()) {
+                if (nombre.isEmpty() || stock.isEmpty() || dosis.isEmpty() || horasList.isEmpty()) {
                     showAlert("Debe ingresar los datos")
                 } else {
                     medData["name"] = nombre.toString()
@@ -75,7 +75,6 @@ class AltaMedicamento : AppCompatActivity() {
 
                     // Generar una clave única para el nuevo medicamento
                     val medicamentoKey = medicamentosRef.push().key
-
                     // Guardar el medicamento en la base de datos
                     if (medicamentoKey != null) {
                         medicamentosRef.child(medicamentoKey.toString()).setValue(medData)

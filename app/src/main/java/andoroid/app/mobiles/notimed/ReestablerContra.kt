@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
@@ -12,6 +13,10 @@ class ReestablerContra : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reestabler_contra)
+        val arrowBack = findViewById<ImageButton>(R.id.backButton)
+        arrowBack.setOnClickListener{
+            finish()
+        }
     }
 
     override fun onBackPressed() {
