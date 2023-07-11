@@ -65,7 +65,7 @@ class AltaMedicamento : AppCompatActivity() {
                 //Crea un objeto para guardar los datos del nuevo medicamento
                 val medData = HashMap<String, Any>()
 
-                if (nombre.isEmpty() || stock.isEmpty() || dosis.isEmpty() || horasList.isEmpty()) {
+                if (nombre.isEmpty() || stock.isEmpty() || dosis.isEmpty() || horasList.isNullOrEmpty()) {
                     showAlert("Debe ingresar los datos")
                 } else {
                     medData["name"] = nombre.toString()
@@ -80,7 +80,7 @@ class AltaMedicamento : AppCompatActivity() {
                         medicamentosRef.child(medicamentoKey.toString()).setValue(medData)
                             .addOnSuccessListener {
                                 println("Medicamento agregado correctamente")
-                                setearAlarmas(nombre.toString())
+                                setearAlarmas(medicamentoKey.toString())
                                 showMain()
                             }
                             .addOnFailureListener { exception ->
@@ -104,7 +104,7 @@ class AltaMedicamento : AppCompatActivity() {
             setupRecyclerView(horasList)
         }
     }
-    private fun setearAlarmas(nombre: String) {
+    private fun setearAlarmas(medicamentoID: String) {
         val alarmScheduler = AndroidAlarmScheduler(this)
         for (horaSeleccionada in horasList) {
             val partesHora = horaSeleccionada.split(":")
@@ -112,7 +112,7 @@ class AltaMedicamento : AppCompatActivity() {
                 val hora = partesHora[0].toIntOrNull()
                 val minuto = partesHora[1].toIntOrNull()
                 if (hora != null && minuto != null) {
-                    val alarmItem = AlarmItem(hour = hora, minute = minuto, message = "¡Es hora de tomar $nombre!")
+                    val alarmItem = AlarmItem(hour = hora, minute = minuto, message = medicamentoID)
                     alarmScheduler.schedule(alarmItem)
                 }
             }
